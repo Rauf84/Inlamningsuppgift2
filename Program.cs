@@ -206,7 +206,8 @@ namespace Inlamningsuppgift2
             Radera
         }
 
-        static void Menu()
+
+        public static void Menu()
         {
             Members Member1 = new Members("Mikael Alexander Larsson", 36, "Vänersborg", "Villa", "Fru, två döttrar och en tredje dotter på väg", "Två kaniner", "Restauranglärare", "Träning och hälsa, surdegsbröd", "Bönchiligryta i tortillabröd", "Elektroniskt. Allt mellan ambient och techno", "Mitt största driv är att det är härligt att få den dagliga hjärngympan man får med programmering, att det är kreativt och att man faktiskt skapar en produkt i slutändan");
             Members Member2 = new Members("Karin Madeleine Karlsson", 35, "Stockholm", "Villa","Smabo och en dotter","Tre katter","ekonomiassistent/testare", "Bakning och spela Stardew Valley ", "Någon form av biff, sötpotatispommes och beanésås", "Just nu, allt som inte är barnvisor", "Har alltid tyckt det är intressant hur system är uppbyggda och hur de skapas, så nu vill jag kunna göra det själv.");
@@ -219,7 +220,8 @@ namespace Inlamningsuppgift2
             Members Member9 = new Members("Sarah Winroth", 31, "Vara ", "Lägenhet ", "Gift ", "Inga ", "Reseledare ", "Motionerar", "Älskar mat i alla former", " Lyssnar på det mesta", "Själva problemlösningen och tillfredsställelsen efteråt");
             Members Member10 = new Members("Farzane Zafarzade", 32, "Karlstad", "lägenhet", "Gift ", "Inga ", "IT-support", "Träning och bakning", "Alla typer av pastarätter", "lugna och klassikermusik", "Problemlösning, inom att lösa problem man lär sig att bli mer tålmodig och kreativ.");
 
-                string choise = null;
+            string choise = null;
+            List<Members> myMembers = new List<Members>() { Member1, Member2, Member3, Member4, Member5, Member6, Member7, Member8, Member9, Member10 };
             do
             {
 
@@ -231,7 +233,6 @@ namespace Inlamningsuppgift2
 
                 choise = Console.ReadLine();
 
-                List<Members> myMembers = new List<Members>() { Member1, Member2, Member3, Member4, Member5, Member6, Member7, Member8, Member9, Member10 };
 
                 switch (choise)
                 {
@@ -246,11 +247,41 @@ namespace Inlamningsuppgift2
 
                     case "2":
                         Console.WriteLine("Du har valt meny 2");
+
+                        Console.WriteLine("Välj en medlem i listan för att ta fram detaljer:");
+                        int i = 0;
+                        foreach (var member in myMembers)
+                        {
+                            i++;
+                            Console.WriteLine($"{i}. {member.Name}");
+                        }
+                        
+                        int memberChoise = Convert.ToInt32(Console.ReadLine());
+                        memberChoise--;
+                        Console.WriteLine($"{myMembers[memberChoise].Name} är {myMembers[memberChoise].Age} år gammal och bor i en {myMembers[memberChoise].Home} i {myMembers[memberChoise].City}.");
+                        Console.WriteLine($"{myMembers[memberChoise].Name}s familj: {myMembers[memberChoise].Family}. Husdjur: {myMembers[memberChoise].Pets}. Hobby: {myMembers[memberChoise].Hobby}");
+                        Console.WriteLine($"{myMembers[memberChoise].Name}s favorit mat: {myMembers[memberChoise].FavFood}");
+                        Console.WriteLine($"{myMembers[memberChoise].Name}s favorit musik/band: {myMembers[memberChoise].FavMusic}");
+                        Console.WriteLine($"{myMembers[memberChoise].Name}s drivkraft i programmering: {myMembers[memberChoise].UnicProp}");
+
                         Console.ReadKey();
                         break;
 
                     case "3":
                         Console.WriteLine("Du har valt meny 3");
+                        Console.WriteLine("Välj en medlem i listan för att radera:");
+                        int x = 0;
+                        foreach (var member in myMembers)
+                        {
+                            x++;
+                            Console.WriteLine($"{x}. {member.Name}");
+                        }
+
+                        int deleteChoise = Convert.ToInt32(Console.ReadLine());
+                        deleteChoise--;
+                        myMembers.Remove(myMembers[deleteChoise]);
+
+
                         Console.ReadKey();
                         break;
 
