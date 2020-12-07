@@ -7,6 +7,7 @@ namespace Inlamningsuppgift2
 {
     class Members
     {
+        // fält -  här listas alla variabler som kommer att användas
         private string name;
         private int age;
         private string city;
@@ -19,27 +20,29 @@ namespace Inlamningsuppgift2
         private string favMusic;
         private string unicProp;
 
+        //Här skapas en tom mall 
         public Members()
         {
 
         }
 
+        // Här skapas en standardiserad mall 
         public Members(string name, int age, string city, string home, string family, string pets, string profession, string hobby, string favFood, string favMusic, string unicProp)
         {
-            this.Name = name;
-            this.Age = age;
-            this.City = city;
-            this.Home = home;
-            this.Family = family;
-            this.Pets = pets;
-            this.Profession = profession;
-            this.Hobby = hobby;
-            this.FavFood = favFood;
-            this.FavMusic = favMusic;
-            this.UnicProp = unicProp;
+            this.name = name;
+            this.age = age;
+            this.city = city;
+            this.home = home;
+            this.family = family;
+            this.pets = pets;
+            this.profession = profession;
+            this.hobby = hobby;
+            this.favFood = favFood;
+            this.favMusic = favMusic;
+            this.unicProp = unicProp;
         }
 
-        
+        // Här skapas properties
         public string Name
         {
             get
@@ -163,21 +166,19 @@ namespace Inlamningsuppgift2
         }
     }
 
-
     class Program
     {
         static void Main(string[] args)
         {
+            Console.Title = " Inlämningsuppgift 2";
             Console.WriteLine("Välkommen till informationsportalen om basgrupper!");
             Inlogg();
-            
         }
-
-        static void Inlogg()
+        static void Inlogg() // whille loop cirkulerar så länge man inte angett coffencode eller matar in q för att avsluta programmet
         {
             string lösenord = "";
 
-            while (lösenord != "coffencode")
+            while (lösenord != "coffencode") 
             {
                 Console.Write("Vänligen ange kod: ");
                 lösenord = Console.ReadLine();
@@ -186,7 +187,6 @@ namespace Inlamningsuppgift2
                     Console.WriteLine("Tack och välkommen åter!");
                     break;
                 }
-                
                 else if (lösenord == "coffencode")
                 {
                     Console.WriteLine("Du är inloggad!");
@@ -196,18 +196,9 @@ namespace Inlamningsuppgift2
                 {
                     Console.WriteLine("Fel kod, vänligen försök igen eller ange q + Enter för att avsluta");
                 }
-
             }
         }
-        enum menu
-        {
-            Lista,
-            Detaljer,
-            Radera
-        }
-
-
-        public static void Menu()
+        public static void Menu() // Metod som ger 4 val
         {
             Members Member1 = new Members("Mikael Alexander Larsson", 36, "Vänersborg", "Villa", "Fru, två döttrar och en tredje dotter på väg", "Två kaniner", "Restauranglärare", "Träning och hälsa, surdegsbröd", "Bönchiligryta i tortillabröd", "Elektroniskt. Allt mellan ambient och techno", "Mitt största driv är att det är härligt att få den dagliga hjärngympan man får med programmering, att det är kreativt och att man faktiskt skapar en produkt i slutändan");
             Members Member2 = new Members("Karin Madeleine Karlsson", 35, "Stockholm", "Villa","Smabo och en dotter","Tre katter","ekonomiassistent/testare", "Bakning och spela Stardew Valley ", "Någon form av biff, sötpotatispommes och beanésås", "Just nu, allt som inte är barnvisor", "Har alltid tyckt det är intressant hur system är uppbyggda och hur de skapas, så nu vill jag kunna göra det själv.");
@@ -233,19 +224,20 @@ namespace Inlamningsuppgift2
 
                 choise = Console.ReadLine();
 
-
-                switch (choise)
+                switch (choise) // hoppar mellan 1-4 i menyn 
                 {
-                    case "1":
+                    case "1": // listar alla deltagare bara med namnparametern i listan myMemberes
                         Console.WriteLine("Du har valt meny 1");
                         foreach (var item in myMembers)
                         {
                             Console.Write($"{item.Name}, ");
                         }
+                        Console.WriteLine("");
+                        Console.WriteLine("_____________________");
                         Console.ReadKey();
                         break;
 
-                    case "2":
+                    case "2": // Tar fram hela medlemslistan i nummerordning med jälp av foreach och ber användaren välja en medlem för att ta fram detaljer 
                         Console.WriteLine("Du har valt meny 2");
 
                         Console.WriteLine("Välj en medlem i listan för att ta fram detaljer:");
@@ -255,19 +247,20 @@ namespace Inlamningsuppgift2
                             i++;
                             Console.WriteLine($"{i}. {member.Name}");
                         }
-                        
                         int memberChoise = Convert.ToInt32(Console.ReadLine());
                         memberChoise--;
+                        // Omvandlar listan myMembers till en mer semantisk text så att det blir lätt bygga meningar istället att ta fram bara data.
                         Console.WriteLine($"{myMembers[memberChoise].Name} är {myMembers[memberChoise].Age} år gammal och bor i en {myMembers[memberChoise].Home} i {myMembers[memberChoise].City}.");
                         Console.WriteLine($"{myMembers[memberChoise].Name}s familj: {myMembers[memberChoise].Family}. Husdjur: {myMembers[memberChoise].Pets}. Hobby: {myMembers[memberChoise].Hobby}");
                         Console.WriteLine($"{myMembers[memberChoise].Name}s favorit mat: {myMembers[memberChoise].FavFood}");
                         Console.WriteLine($"{myMembers[memberChoise].Name}s favorit musik/band: {myMembers[memberChoise].FavMusic}");
                         Console.WriteLine($"{myMembers[memberChoise].Name}s drivkraft i programmering: {myMembers[memberChoise].UnicProp}");
 
+                        Console.WriteLine("_____________________");
                         Console.ReadKey();
                         break;
 
-                    case "3":
+                    case "3": // listar fram alla medlemmar och sedan ger användaren val i nummerordning vem ska raderas.
                         Console.WriteLine("Du har valt meny 3");
                         Console.WriteLine("Välj en medlem i listan för att radera:");
                         int x = 0;
@@ -279,21 +272,19 @@ namespace Inlamningsuppgift2
 
                         int deleteChoise = Convert.ToInt32(Console.ReadLine());
                         deleteChoise--;
+                        Console.WriteLine(myMembers[deleteChoise].Name + " har tagits bort från listan!");
                         myMembers.Remove(myMembers[deleteChoise]);
-
 
                         Console.ReadKey();
                         break;
 
-                    default:
+                    default: // säkerställer att valet i menyn ska hamna mellan 1-4, ger annars felmeddelande och ber användaren försöka igen eller avsluta programmet
                         if (choise != "4") { 
-                        Console.WriteLine("Fel val av meny");
+                        Console.WriteLine("Fel val av meny. Vänligen välj mellan 1-4");
                         }
                         break;
-
                 }
-            } while (choise != "4");
+            } while (choise != "4"); // ett val för att avsluta programmet
         }
     }
-
 }
